@@ -26,6 +26,9 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+[Oo]utput/
+MLEZUpdater/MLEZUpdater.exe
+MLEZUpdater/dotnetwarp_temp/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

@@ -1,6 +1,5 @@
 ﻿using Ionic.Zip;
 using Newtonsoft.Json;
-using Octokit;
 using SevenZip;
 using System;
 using System.Diagnostics;
@@ -17,11 +16,11 @@ namespace MLEZUpdaterBase
         public static async Task StartUpdating()
         {
             var ODirc = Directory.GetCurrentDirectory();
-            Directory.CreateDirectory(ODirc + "/UnHollower/UnityDepends");
-            Directory.CreateDirectory(ODirc + "/IL2CPPDumper");
-
             GrabAPI.DeleteAllFiles(ODirc + "\\UnHollower");
             GrabAPI.DeleteAllFiles(ODirc + "\\IL2CPPDumper");
+
+            Directory.CreateDirectory(ODirc + "/UnHollower/UnityDepends");
+            Directory.CreateDirectory(ODirc + "/IL2CPPDumper");
 
             Console.ResetColor();
             Console.WriteLine(new string('=', 70));
@@ -40,6 +39,16 @@ namespace MLEZUpdaterBase
                     break;
                 }
             }
+            if (!string.IsNullOrEmpty(version))
+            {
+                Console.WriteLine($"Found Version: {version}");
+                Console.Title = Console.Title + $" Version: {version}";
+            }
+            else
+            {
+                Console.WriteLine($"Version Not Found.");
+                Console.Title = Console.Title + $" Version: Unknown";
+            }
             var Contents = await GrabAPI.Client.Repository.Content.GetAllContents("HerpDerpinstine", "MelonLoader", "BaseLibs/Unity Dependencies");
             foreach (var entires in Contents)
             {
@@ -54,16 +63,6 @@ namespace MLEZUpdaterBase
                 File.WriteAllBytes(ODirc + "/UnHollower/UnityDepends/UnityDepends.zip", depends);
                 ZipFile.Read(ODirc + "/UnHollower/UnityDepends/UnityDepends.zip").ExtractAll(ODirc + "/UnHollower/UnityDepends");
                 foundDepends = true;
-            }
-            if (!string.IsNullOrEmpty(version))
-            {
-                Console.WriteLine($"Found Version: {version}");
-                Console.Title = Console.Title + $" Version: {version}";
-            }
-            else
-            {
-                Console.WriteLine($"Version Not Found.");
-                Console.Title = Console.Title + $" Version: Unknown";
             }
             Console.ResetColor();
             Console.WriteLine(new string('=', 70));
