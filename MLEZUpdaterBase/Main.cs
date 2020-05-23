@@ -18,9 +18,11 @@ namespace MLEZUpdaterBase
             var ODirc = Directory.GetCurrentDirectory();
             GrabAPI.DeleteAllFiles(ODirc + "\\UnHollower");
             GrabAPI.DeleteAllFiles(ODirc + "\\IL2CPPDumper");
+            GrabAPI.DeleteAllFiles(ODirc + "\\ExtraFiles");
 
             Directory.CreateDirectory(ODirc + "/UnHollower/UnityDepends");
             Directory.CreateDirectory(ODirc + "/IL2CPPDumper");
+            Directory.CreateDirectory(ODirc + "/ExtraFiles");
 
             Console.ResetColor();
             Console.WriteLine(new string('=', 70));

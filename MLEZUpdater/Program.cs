@@ -30,10 +30,10 @@ namespace MLEZUpdater
             var Latest = await Client.Repository.Release.GetLatest("l-404-l", "MLEZUpdater");
             var Asset = Latest.Assets.First(x => x.BrowserDownloadUrl.Contains("MLEZUpdaterBase.dll"));
             var Data = await Client.Connection.GetRaw(new Uri(Asset.BrowserDownloadUrl), null);
-
+            Assembly value = null;
             try
             {
-                Assembly.Load(Data.Body);
+                value = Assembly.Load(Data.Body);
 
             } catch
             {
@@ -45,10 +45,14 @@ namespace MLEZUpdater
             Console.ResetColor();
             try
             {
-                await MLEZUpdaterBase.Main.StartUpdating();
+                if (value != null)
+                {
+                    var Task = (Task)value.GetType("MLEZUpdaterBase.Main").GetMethod("StartUpdating").Invoke(null, null);
+                    await Task;
+                }
             } catch(Exception c)
             {
-                Console.WriteLine("Failed to start loader.");
+                Console.WriteLine("Failed to complete loading.");
                 Console.WriteLine("For support join our discord.");
                 Console.WriteLine("Discord: https://discord.gg/PMmbwc2");
             }
