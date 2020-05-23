@@ -13,7 +13,14 @@ namespace MLEZUpdaterBase
     public static class GrabAPI
     {
         public static GitHubClient Client = new GitHubClient(new ProductHeaderValue("MLEZUpdater"));
-
+        
+        public static async Task<byte[]> DownloadFilesContentAsync(string Author, string Repo, string FileName)
+        {
+            var Contents = await Client.Repository.Content.GetAllContents(Author, Repo, FileName);
+            var File = Contents.First();
+            var Data = await Client.Connection.GetRaw(new Uri(File.DownloadUrl), null);
+            return Data.Body;
+        }
         public static async Task<byte[]> DownloadFileAsync(string Author, string Repo, string FileName)
         {
             var Latest = await Client.Repository.Release.GetLatest(Author, Repo);

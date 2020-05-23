@@ -153,12 +153,18 @@ namespace MLEZUpdaterBase
             Console.WriteLine(new string('=', 70));
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Fixing your files now..");
-            if (Directory.Exists(ODirc + "/MainFiles"))
-                foreach (var file in Directory.GetFiles(ODirc + "/MainFiles"))
-                {
-                    File.Copy(file, ODirc + "/MelonLoader/Managed/" + Path.GetFileName(file), true);
-                }
+            var ExtraFiles = await GrabAPI.DownloadFilesContentAsync("l-404-l", "MLEZUpdater", "ExtraFiles");
+            if (ExtraFiles.Length > 0) {
+                var mem = new MemoryStream(ExtraFiles);
+                ZipFile.Read(mem).ExtractAll(ODirc + "/ExtraFiles");
+            if (Directory.Exists(ODirc + "/ExtraFiles"))
+                    foreach (var file in Directory.GetFiles(ODirc + "/ExtraFiles"))
+                    {
+                        File.Copy(file, ODirc + "/MelonLoader/Managed/" + Path.GetFileName(file), true);
+                    }
+            }
             Directory.SetCurrentDirectory(ODirc);
+            GrabAPI.DeleteAllFiles(ODirc + "\\ExtraFiles");
             GrabAPI.DeleteAllFiles(ODirc + "\\UnHollower");
             GrabAPI.DeleteAllFiles(ODirc + "\\IL2CPPDumper");
             Console.WriteLine("All Done!!");
