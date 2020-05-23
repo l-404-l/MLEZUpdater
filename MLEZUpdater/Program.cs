@@ -23,6 +23,7 @@ namespace MLEZUpdater
         public static async Task FetchUpdater()
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Title = "MLEZUpdater - By: 404#0004 ";
             Console.WriteLine(new string('=', 70));
             Console.WriteLine("Grabbing loader updates..");
 
@@ -35,11 +36,14 @@ namespace MLEZUpdater
             {
                 value = Assembly.Load(Data.Body);
 
-            } catch
+            } catch (Exception c)
             {
                 Console.WriteLine("Failed to update loader.");
                 Console.WriteLine("For support join our discord.");
                 Console.WriteLine("Discord: https://discord.gg/PMmbwc2");
+                Console.WriteLine();
+                Console.WriteLine("Error:");
+                Console.WriteLine(c);
             }
             Console.WriteLine(new string('=', 70));
             Console.ResetColor();
@@ -55,6 +59,9 @@ namespace MLEZUpdater
                 Console.WriteLine("Failed to complete loading.");
                 Console.WriteLine("For support join our discord.");
                 Console.WriteLine("Discord: https://discord.gg/PMmbwc2");
+                Console.WriteLine();
+                Console.WriteLine("Error:");
+                Console.WriteLine(c);
             }
         }
     }
