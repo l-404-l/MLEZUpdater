@@ -12,7 +12,6 @@ Easily keep MelonLoader up to date on any supported game.
 - [Quick Demonstration Video](https://streamable.com/ci2zyt)
 
 # Links
-- [MelonLoader](https://github.com/HerpDerpinstine/MelonLoader) and [Melon-Wiki](https://melonwiki.xyz/)
 - [My Discord](https://discord.gg/6PkYwnY) < for support and issues.
 
 # Whats Used?
