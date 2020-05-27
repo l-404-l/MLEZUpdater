@@ -9,7 +9,7 @@ namespace MLEZUpdater
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
 
             new Thread(async () => {
@@ -17,7 +17,7 @@ namespace MLEZUpdater
                 await FetchUpdater();
 
             }).Start();
-            Thread.Sleep(-1);
+            await Task.Delay(-1);
         }
 
         public static async Task FetchUpdater()

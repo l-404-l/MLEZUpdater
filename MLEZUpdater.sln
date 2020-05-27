@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLEZUpdater", "MLEZUpdater\MLEZUpdater.csproj", "{B5D3FFBC-8A26-4F4A-B208-B5B89CA15E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLEZUpdater", "MLEZUpdater\MLEZUpdater.csproj", "{B5D3FFBC-8A26-4F4A-B208-B5B89CA15E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLEZUpdaterBase", "MLEZUpdaterBase\MLEZUpdaterBase.csproj", "{EE227A6C-7984-4B60-ADD6-499166585DC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLEZUpdaterBase", "MLEZUpdaterBaseV2\MLEZUpdaterBase.csproj", "{303B8AE9-98F2-42C9-BDC0-982F28F06173}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B5D3FFBC-8A26-4F4A-B208-B5B89CA15E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5D3FFBC-8A26-4F4A-B208-B5B89CA15E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5D3FFBC-8A26-4F4A-B208-B5B89CA15E87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE227A6C-7984-4B60-ADD6-499166585DC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE227A6C-7984-4B60-ADD6-499166585DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE227A6C-7984-4B60-ADD6-499166585DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE227A6C-7984-4B60-ADD6-499166585DC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{303B8AE9-98F2-42C9-BDC0-982F28F06173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{303B8AE9-98F2-42C9-BDC0-982F28F06173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{303B8AE9-98F2-42C9-BDC0-982F28F06173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{303B8AE9-98F2-42C9-BDC0-982F28F06173}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

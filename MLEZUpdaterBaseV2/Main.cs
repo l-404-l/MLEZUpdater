@@ -16,7 +16,11 @@ namespace MLEZUpdaterBase
         public static async Task StartUpdating()
         {
             var ODirc = Directory.GetCurrentDirectory();
+
             GrabAPI.DeleteAllFiles(ODirc + "\\UnHollower");
+            if (File.Exists(ODirc + "/winmm.dll"))
+                File.Delete(ODirc + "/winmm.dll");
+            GrabAPI.DeleteAllFiles(ODirc + "\\MelonLoader");
             GrabAPI.DeleteAllFiles(ODirc + "\\IL2CPPDumper");
             GrabAPI.DeleteAllFiles(ODirc + "\\ExtraFiles");
 
@@ -49,7 +53,7 @@ namespace MLEZUpdaterBase
             else
             {
                 Console.WriteLine($"Version Not Found.");
-                Console.Title = Console.Title + $" Version: Unknown";
+                Console.Title += $" Version: Unknown";
             }
             var Contents = await GrabAPI.Client.Repository.Content.GetAllContents("HerpDerpinstine", "MelonLoader", "BaseLibs/Unity Dependencies");
             foreach (var entires in Contents)
@@ -67,11 +71,12 @@ namespace MLEZUpdaterBase
                 ZipFile.Read(dependzip).ExtractAll(ODirc + "/UnHollower/UnityDepends", ExtractExistingFileAction.OverwriteSilently);
                 foundDepends = true;
             }
-            Console.ResetColor();
-            Console.WriteLine(new string('=', 70));
-            Thread.Sleep(2000);
+
 
             Console.ResetColor();
+            Console.WriteLine(new string('=', 70));
+            await Task.Delay(2000);
+
             Console.WriteLine(new string('=', 70));
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("MelonLoader Downloading..");
@@ -83,7 +88,7 @@ namespace MLEZUpdaterBase
             Console.ResetColor();
             Console.WriteLine(new string('=', 70));
 
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
             Console.Clear();
 
             Console.ResetColor();
@@ -95,7 +100,9 @@ namespace MLEZUpdaterBase
             Il2CPPDumper.ExtractAll(Directory.GetCurrentDirectory(), ExtractExistingFileAction.OverwriteSilently);
 
             File.WriteAllText("config.json", JsonConvert.SerializeObject(new il2cppdumpConfig()));
-            var pros = new ProcessStartInfo(Directory.GetCurrentDirectory() + "\\Il2CppDumper.exe", $"{ODirc}\\GameAssembly.dll {ODirc}\\VRChat_Data\\il2cpp_data\\Metadata\\global-metadata.dat");
+            var pros = new ProcessStartInfo(Directory.GetCurrentDirectory() + "\\Il2CppDumper.exe");
+            pros.ArgumentList.Add($"{ODirc}\\GameAssembly.dll");
+            pros.ArgumentList.Add($"{ODirc}\\VRChat_Data\\il2cpp_data\\Metadata\\global-metadata.dat");
             var il2cppdp = System.Diagnostics.Process.Start(pros);
             await GrabAPI.WaitForProcess(il2cppdp);
 
@@ -121,7 +128,14 @@ namespace MLEZUpdaterBase
             {
                 Console.WriteLine(reallist.FindIndex(x => x == vrs) + ": Name: " + vrs.Name);
             }
-            var value = Convert.ToInt32(Console.ReadLine());
+            int value = 1;
+            try
+            {
+                value = Convert.ToInt32(Console.ReadLine());
+            } catch
+            {
+                Console.WriteLine("Invalid Number Defaulting to 1");
+            }
             if (value > reallist.Count)
                 value = 0;
             var item = reallist[value];
@@ -140,15 +154,24 @@ namespace MLEZUpdaterBase
                 }
             }
             
-            var unhollowp = System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + "\\AssemblyUnhollower.exe", $"--input={ODirc + "\\IL2CPPDumper\\DummyDll"} " + $"--output={ODirc + "\\MelonLoader\\Managed"} " + $"--mscorlib={ODirc + "\\MelonLoader\\Managed\\mscorlib.dll"} " + (foundDepends ? $"--unity={ODirc + "/UnHollower/UnityDepends"}" : ""));
+            var pros2 = new ProcessStartInfo(Directory.GetCurrentDirectory() + "\\AssemblyUnhollower.exe");
+            pros2.ArgumentList.Add($"--input={ODirc + "\\IL2CPPDumper\\DummyDll"}");
+            pros2.ArgumentList.Add($"--output={ODirc + "\\MelonLoader\\Managed"}");
+            pros2.ArgumentList.Add($"--mscorlib={ODirc + "\\MelonLoader\\Managed\\mscorlib.dll"}");
+            if (foundDepends)
+                pros2.ArgumentList.Add($"--unity={ODirc + "/UnHollower/UnityDepends"}");
+            var unhollowp = System.Diagnostics.Process.Start(pros2);
             await GrabAPI.WaitForProcess(unhollowp);
-            unhollowp.Kill();
+            
+            
             Console.ResetColor();
             Console.WriteLine(new string('=', 70));
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
             Console.Clear();
             Console.ResetColor();
             Console.WriteLine(new string('=', 70));
+
+
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Fixing your files now..");
             var ExtraFiles = await GrabAPI.DownloadFilesContentAsync("l-404-l", "MLEZUpdater", "ExtraFiles");
@@ -170,8 +193,12 @@ namespace MLEZUpdaterBase
             GrabAPI.DeleteAllFiles(ODirc + "\\UnHollower");
             GrabAPI.DeleteAllFiles(ODirc + "\\IL2CPPDumper");
             Console.WriteLine("All Done!!");
+
+
             Console.ResetColor();
             Console.WriteLine(new string('=', 70));
+            await Task.Delay(2000);
+            Process.GetCurrentProcess().Close();
         }
 
 
