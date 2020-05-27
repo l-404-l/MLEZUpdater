@@ -16,6 +16,7 @@ namespace MLEZUpdaterBase
         public static async Task StartUpdating()
         {
             var ODirc = Directory.GetCurrentDirectory();
+            var metadata = GrabAPI.FindMetaData();
 
             GrabAPI.DeleteAllFiles(ODirc + "\\UnHollower");
             if (File.Exists(ODirc + "/winmm.dll"))
@@ -102,7 +103,7 @@ namespace MLEZUpdaterBase
             File.WriteAllText("config.json", JsonConvert.SerializeObject(new il2cppdumpConfig()));
             var pros = new ProcessStartInfo(Directory.GetCurrentDirectory() + "\\Il2CppDumper.exe");
             pros.ArgumentList.Add($"{ODirc}\\GameAssembly.dll");
-            pros.ArgumentList.Add($"{ODirc}\\VRChat_Data\\il2cpp_data\\Metadata\\global-metadata.dat");
+            pros.ArgumentList.Add($"{metadata}");
             var il2cppdp = System.Diagnostics.Process.Start(pros);
             await GrabAPI.WaitForProcess(il2cppdp);
 

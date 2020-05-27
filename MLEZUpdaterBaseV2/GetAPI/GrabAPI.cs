@@ -72,6 +72,19 @@ namespace MLEZUpdaterBase
             }
         }
 
+        public static string FindMetaData()
+        {
+            foreach(var driec in Directory.GetDirectories(Directory.GetCurrentDirectory()))
+            {
+                if (driec.ToLower().Contains("_data") && Directory.Exists(driec +"/il2cpp_data"))
+                {
+                    return driec + "\\il2cpp_data\\Metadata\\global-metadata.dat";
+                }
+            }
+            throw new Exception("MetaData not found");
+            return "NOT FOUND";
+        }
+
         public static async Task WaitForProcess(Process app)
         { 
             while(Process.GetProcesses().Any(x => x.Id == app.Id))
