@@ -198,7 +198,6 @@ namespace MLEZUpdaterBase
             Console.ResetColor();
             Console.WriteLine(new string('=', 70));
             await Task.Delay(2000);
-            Process.GetCurrentProcess().Close();
         }
 
 
