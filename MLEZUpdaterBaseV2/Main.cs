@@ -42,7 +42,14 @@ namespace MLEZUpdaterBase
                 if (t.Contains("\\Unity\\") && t.Contains("\\Editor\\Data"))
                 {
                     var thesplit = t.Substring(t.IndexOf("\\Unity\\")).Split('\\');
-                    version = thesplit[4];
+                    foreach(var strngs in thesplit)
+                    {
+                        if (strngs.Contains("20"))
+                        {
+                            version = strngs;
+                            break;
+                        }
+                    }
                     break;
                 }
             }
