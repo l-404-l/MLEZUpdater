@@ -42,7 +42,7 @@ namespace MLEZUpdaterBase
                 if (t.Contains("\\Unity\\") && t.Contains("\\Editor\\Data"))
                 {
                     var thesplit = t.Substring(t.IndexOf("\\Unity\\")).Split('\\');
-                    version = thesplit[2];
+                    version = thesplit[4];
                     break;
                 }
             }
@@ -104,7 +104,7 @@ namespace MLEZUpdaterBase
             var pros = new ProcessStartInfo(Directory.GetCurrentDirectory() + "\\Il2CppDumper.exe");
             pros.ArgumentList.Add($"{ODirc}\\GameAssembly.dll");
             pros.ArgumentList.Add($"{metadata}");
-            var il2cppdp = System.Diagnostics.Process.Start(pros);
+            var il2cppdp = Process.Start(pros);
             await GrabAPI.WaitForProcess(il2cppdp);
 
             Console.ResetColor();
