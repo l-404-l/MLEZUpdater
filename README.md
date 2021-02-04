@@ -15,6 +15,6 @@ Easily keep MelonLoader up to date on any supported game.
 - [My Discord](https://discord.gg/6PkYwnY) < for support and issues.
 
 # Whats Used?
-- [MelonLoader](https://github.com/HerpDerpinstine/MelonLoader) by HerpDerpinstine
+- [MelonLoader - NaaTiiVee Edit](https://github.com/NaaTiiVee/MelonLoader) by NaaTiiVee
 - [Il2CppAssemblyUnhollower](https://github.com/knah/Il2CppAssemblyUnhollower) by Knah
 - [Il2CppDumper](https://github.com/Perfare/Il2CppDumper) by Perfare
