@@ -1,5 +1,5 @@
-# MelonLoader Easy Updater
-Easily keep MelonLoader up to date on any supported game.
+# MelonLoaderSL Easy Updater
+Easily keep MelonLoaderSL up to date on any supported game.
 
 # Requirements
 - [Lastest .NETCore](https://dotnet.microsoft.com/download/dotnet-core/current/runtime)
